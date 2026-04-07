@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Information - {{.IP}}</title>
+    <script src="https://s3.ahmz.ir/lib/tailwind-3.4.17.js"></script>
+</head>
+<body class="min-h-screen antialiased text-slate-100 bg-slate-950 selection:bg-cyan-300/30 selection:text-cyan-50">
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(34,211,238,0.16),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(20,184,166,0.2),transparent_28%),radial-gradient(circle_at_50%_100%,rgba(14,116,144,0.35),transparent_45%),linear-gradient(to_bottom,#020617,#0b1120_45%,#020617)]"></div>
+        <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/60 to-transparent"></div>
+    </div>
+
+    <main class="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+        <section class="overflow-hidden rounded-3xl border border-cyan-200/15 bg-slate-900/45 shadow-[0_20px_80px_rgba(8,145,178,0.16)] backdrop-blur-2xl">
+            <div class="border-b border-cyan-100/10 bg-gradient-to-r from-cyan-500/10 via-teal-400/5 to-sky-500/10 px-6 py-7 sm:px-8">
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                    <div>
+                        <p class="text-[11px] font-semibold uppercase tracking-[0.25em] text-cyan-200/70">IP Intelligence</p>
+                        <h1 class="mt-2 text-3xl font-black tracking-tight text-cyan-200 sm:text-4xl break-all">{{.IP}}</h1>
+                    </div>
+                    {{if .LookupOK}}
+                    <div class="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1.5 text-xs font-medium text-cyan-100/90">
+                        <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+                        {{.LookupState}}
+                    </div>
+                    {{else}}
+                    <div class="inline-flex items-center gap-2 rounded-full border border-rose-300/25 bg-rose-400/10 px-3 py-1.5 text-xs font-medium text-rose-100/90">
+                        <span class="h-2 w-2 rounded-full bg-rose-400"></span>
+                        {{.LookupState}}
+                    </div>
+                    {{end}}
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4 p-6 sm:p-8 md:grid-cols-2">
+                <div class="rounded-2xl border border-slate-700/60 bg-slate-800/40 p-5">
+                    <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">CIDR</p>
+                    <p class="mt-2 text-xl font-semibold text-slate-100">{{if .CIDR}}{{.CIDR}}{{else}}N/A{{end}}</p>
+                </div>
+                <div class="rounded-2xl border border-slate-700/60 bg-slate-800/40 p-5">
+                    <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">ASN</p>
+                    <p class="mt-2 text-xl font-semibold text-slate-100">{{if .ASN}}AS{{.ASN}}{{else}}N/A{{end}}</p>
+                </div>
+
+                <div class="rounded-2xl border border-slate-700/60 bg-slate-800/40 p-5 md:col-span-2">
+                    <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">Network Name</p>
+                    <p class="mt-2 text-xl font-semibold text-slate-100">{{if .Name}}{{.Name}}{{else}}N/A{{end}}</p>
+                </div>
+
+                <div class="rounded-2xl border border-slate-700/60 bg-slate-800/40 p-5 md:col-span-2">
+                    <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">Organization</p>
+                    <p class="mt-2 text-xl font-semibold text-slate-100">{{if .Org}}{{.Org}}{{else}}N/A{{end}}</p>
+                </div>
+
+                <div class="rounded-2xl border border-slate-700/60 bg-slate-800/40 p-5">
+                    <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">Country Code</p>
+                    <p class="mt-2 text-xl font-semibold text-slate-100">{{if .CountryCode}}{{.CountryCode}}{{else}}N/A{{end}}</p>
+                </div>
+                <div class="rounded-2xl border border-slate-700/60 bg-slate-800/40 p-5">
+                    <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">Domain</p>
+                    <p class="mt-2 break-all text-xl font-semibold text-slate-100">{{if .Domain}}{{.Domain}}{{else}}N/A{{end}}</p>
+                </div>
+            </div>
+
+            <footer class="flex flex-col gap-2 border-t border-slate-700/60 bg-slate-900/60 px-6 py-4 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+                <p>Tip: add <span class="font-semibold text-cyan-200">?format=json</span> for JSON output.</p>
+                <p class="text-slate-500">Auto-updated database</p>
+            </footer>
+        </section>
+    </main>
+</body>
+</html>
